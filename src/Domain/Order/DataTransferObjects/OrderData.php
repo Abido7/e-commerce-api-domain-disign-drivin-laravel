@@ -19,7 +19,7 @@ class OrderData
     ): self {
         return new self(
             address: $request->address,
-            products: OrderProductDataCollection::create($request->input('products'))
+            products: OrderProductDataCollection::create($request->products)
         );
     }
 }

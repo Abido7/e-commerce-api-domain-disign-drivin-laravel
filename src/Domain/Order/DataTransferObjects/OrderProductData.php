@@ -2,9 +2,6 @@
 
 namespace Domain\Order\DataTransferObjects;
 
-use App\Http\Requests\StoreOrderRequest;
-
-use Domain\Category\Models\Category;
 use Domain\Product\Models\Product;
 use Domain\Order\Collections\OrderProductAttributesCollection;
 
@@ -21,7 +18,7 @@ class OrderProductData
     public static function create(
         array $data
     ): self {
-        return new self(
+        return   new self(
             product: Product::findOrFail($data['product_id']),
             quantity: $data['quantity'],
             options: OrderProductAttributesCollection::create($data['options'])

@@ -24,7 +24,7 @@ class ProductResource extends JsonResource
             'image' => asset("uploads/$this->img"),
             'price' => $this->price,
             'pices_no' => $this->pices_no,
-            // 'attributes' => AttributeResource::collection($this->attributes),
+            'attributes' => AttributeResource::collection($this->whenLoaded('attributes')),
             'category_en' => $this->category->getTranslation('name', 'en'),
             'category_ar' => $this->category->getTranslation('name', 'ar'),
         ];

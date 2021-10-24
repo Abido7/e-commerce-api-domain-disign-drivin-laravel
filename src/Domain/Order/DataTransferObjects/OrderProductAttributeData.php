@@ -12,12 +12,11 @@ class OrderProductAttributeData
         public ?Option $option,
     ) {
     }
-
     public static function create(
         array $data
     ): self {
         return new self(
-            option: Option::findOrFail($data['option_id']),
+            option: Option::findorfail($data['option_id']),
         );
     }
 }

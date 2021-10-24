@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class OptionResource extends JsonResource
+class AttributeOptionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,11 +14,6 @@ class OptionResource extends JsonResource
      */
     public function toArray($request)
     {
-        return  [
-            // "attribute_id" => $this->option->attribute->id,
-            // "attribute" => $this->option->attribute->name,
-            "option_id" => $this->id,
-            "option" => $this->value,
-        ];
+        return [];
     }
 }

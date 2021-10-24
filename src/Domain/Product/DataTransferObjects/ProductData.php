@@ -36,22 +36,4 @@ class ProductData
             category: Category::findOrFail($request->category_id)
         );
     }
-    //
-    //
-    //    // update function
-    //    public static function  fromUpdateRequest(
-    //        UpdateProductRequest $UpdateProductRequest,
-    //        Product $product
-    //    ): self {
-    //        return new self(
-    //            name_en: $UpdateProductRequest->nameen,
-    //            name_ar: $UpdateProductRequest->namear,
-    //            description_en: $UpdateProductRequest->descriptionen,
-    //            description_ar: $UpdateProductRequest->descriptionar,
-    //            img: ImageUploadHandeller::imagePath($UpdateProductRequest, $product),
-    //            price: $UpdateProductRequest->price,
-    //            pices_no: $UpdateProductRequest->picesno,
-    //            category: Category::find($UpdateProductRequest->input('category_id'))
-    //        );
-    //    }
 }

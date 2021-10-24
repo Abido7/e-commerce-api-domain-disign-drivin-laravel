@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Middleware\IsAdmin;
 use Illuminate\Foundation\Http\Kernel;
 
 class HttpKernel extends Kernel
@@ -54,6 +55,7 @@ class HttpKernel extends Kernel
      * @var array
      */
     protected $routeMiddleware = [
+        'isAdmin' => IsAdmin::class,
         'auth' => \Support\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,

@@ -2,6 +2,7 @@
 
 namespace Domain\Order\Models;
 
+use App\Enums\OrderStatusEnum;
 use Domain\OrderDetails\Models\OrderDetail;
 use Domain\User\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,6 +19,9 @@ class Order extends Model
         'total',
     ];
 
+    protected $casts = [
+        'status' => OrderStatusEnum::class,
+    ];
 
     public function user()
     {
@@ -27,5 +31,10 @@ class Order extends Model
     public function  details()
     {
         return $this->hasMany(OrderDetail::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(products::class);
     }
 }

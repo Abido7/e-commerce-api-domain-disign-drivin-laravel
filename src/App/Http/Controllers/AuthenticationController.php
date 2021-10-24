@@ -66,7 +66,7 @@ class AuthenticationController extends Controller
     }
 
 
-    // this method signs out users by removing tokens
+    // this method logout users by removing tokens
     public function logout()
     {
         auth()->user()->tokens()->delete();

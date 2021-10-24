@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\AttributeController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CategoriesController;
@@ -18,9 +21,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 
 //register new user
 Route::post('register', [AuthenticationController::class, 'register']);
@@ -33,8 +33,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('orders', OrderController::class);
 });
 
-Route::get('categories', [CategoriesController::class, 'index']);
-Route::get('test/{product}', [CategoriesController::class, 'test']);
-Route::get('categories/{category}', [CategoriesController::class, 'show']);
+Route::prefix('dashboard')->middleware(['auth:sanctum', 'isAdmin'])->group(function () {
+    Route::get('/', [HomeController::class, 'index']);
+    Route::apiResource('products', AdminProductController::class);
+    Route::apiResource('orders', AdminOrderController::class);
+});
+
+Route::apiResource('categories', CategoriesController::class)->only(['index', 'show', 'test']);
 Route::apiResource('products', ProductController::class);
-Route::get('attributes', [AttributeController::class, 'index']);
