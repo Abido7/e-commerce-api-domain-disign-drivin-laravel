@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductActivationRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductResource;
-use Domain\Admin\Product\Filters\FilterAction;
 use Domain\Product\Actions\CreateProductAction;
 use Domain\Product\Actions\ImageAction;
 use Domain\Product\Actions\UpdateProductAction;
+use Domain\Product\Actions\UpdateProductActivationAction;
+use Domain\Product\DataTransferObjects\ProductActiveData;
 use Domain\Product\DataTransferObjects\ProductData;
 use Domain\Product\Filters\FilterByprice;
 use Domain\Product\Models\Product;
@@ -21,7 +23,20 @@ class ProductController extends Controller
     /** Show All poducts */
     public function index()
     {
-        return ProductResource::collection(FilterAction::excute());
+        $products = QueryBuilder::for(Product::class)
+            ->allowedFilters([
+                AllowedFilter::custom('price', new FilterByprice),
+                AllowedFilter::partial('name'),
+                AllowedFilter::exact('category_id'),
+            ])
+            ->orderBy('id', 'desc');
+
+        if (request()->input('limit')) {
+            return $products->paginate(5)
+                ->appends(request()->query());
+        }
+
+        return ProductResource::collection($products->get());
     }
 
     /** Show poduct */
@@ -53,8 +68,15 @@ class ProductController extends Controller
         ], 200);
     }
 
-
-
+    public function activation(
+        Product $product,
+        UpdateProductActivationRequest $request,
+        UpdateProductActivationAction $action
+    ) {
+        $productData =  ProductActiveData::fromRequest($request);
+        $product = $action->execute($productData, $product);
+        return response()->json(['message' => 'success']);
+    }
 
     /** destroy  poduct */
     public function destroy(Product $product)

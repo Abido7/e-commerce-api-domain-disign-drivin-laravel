@@ -22,7 +22,6 @@ class CreateOrderAction
             $detail->order()->associate($order);
             $detail->product()->associate($orderData->product);
             $detail->save();
-            $detail->refresh();
             $order->update(['total' => (new CalculateTotalAction($data))->execute($data)]);
             foreach ($orderData->options as $option) {
                 $orderDetailAttribute = new OrderDetailsAttribute();

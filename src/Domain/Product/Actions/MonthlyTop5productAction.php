@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Admin\Product\Actions;
+namespace Domain\Product\Actions;
 
 use Carbon\Carbon;
 use Domain\OrderDetails\Models\OrderDetail;

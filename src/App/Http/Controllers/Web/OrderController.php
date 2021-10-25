@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use App\Controllers\Controller;
 use App\Http\Resources\OrderResource;
 use App\Http\Requests\StoreOrderRequest;
-use App\Http\Requests\UpdateOrderRequest;
-use App\Http\Resources\OrderDetailResource;
+
 use Domain\Order\Actions\CreateOrderAction;
 use Domain\Order\DataTransferObjects\OrderData;
 use Domain\Order\Models\Order;
@@ -17,7 +16,6 @@ class OrderController extends Controller
     {
         return OrderResource::collection(auth()->user()->orders);
     }
-
 
     /** Store New Order */
     public function store(

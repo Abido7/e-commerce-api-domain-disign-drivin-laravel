@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Admin\Product\Filters;
+namespace Domain\Product\Actions;
 
 use Domain\Product\Filters\FilterByprice;
 use Domain\Product\Models\Product;

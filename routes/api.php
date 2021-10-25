@@ -1,13 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\OrderController as AdminOrderController;
-use App\Http\Controllers\Admin\ProductController as AdminProductController;
-use App\Http\Controllers\AttributeController;
-use App\Http\Controllers\AuthenticationController;
-use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\productController;
+
+use App\Http\Controllers\Auth\AuthenticationController;
+use App\Http\Controllers\Auth\UserController;
+use App\Http\Controllers\Web\CategoriesController;
+use App\Http\Controllers\Web\ProductController as WebProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,9 +35,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 Route::prefix('dashboard')->middleware(['auth:sanctum', 'isAdmin'])->group(function () {
     Route::get('/', [HomeController::class, 'index']);
-    Route::apiResource('products', AdminProductController::class);
-    Route::apiResource('orders', AdminOrderController::class);
+    Route::apiResource('products', productController::class);
+    Route::apiResource('users', UserController::class);
+    Route::patch('product/activation/{product}', [productController::class, 'activation']);
+    Route::apiResource('orders', OrderController::class);
 });
 
 Route::apiResource('categories', CategoriesController::class)->only(['index', 'show', 'test']);
-Route::apiResource('products', ProductController::class);
+Route::apiResource('products', WebProductController::class);

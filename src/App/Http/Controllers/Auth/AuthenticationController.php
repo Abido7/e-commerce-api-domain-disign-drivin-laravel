@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use App\Controllers\Controller;
 use App\Http\Resources\UserResource;
@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthenticationController extends Controller
 {
-
 
     //this method adds new users
     public function register(Request $request)

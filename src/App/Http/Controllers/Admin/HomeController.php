@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Controllers\Controller;
-use Domain\Admin\Product\Actions\MonthlyTop5productAction;
 use Domain\Order\Models\Order;
+use Domain\Product\Actions\MonthlyTop5productAction;
 use Domain\Product\Models\Product;
 use Domain\User\Models\User;
 
